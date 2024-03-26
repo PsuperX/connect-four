@@ -1,3 +1,19 @@
+# Quem faz oq:
+## Ines
+- A*
+- heuristicas
+
+## Pedro
+- MCTS
+- analise
+
+## Dani
+- Minimax(s)
+- intro
+
+
+
+
 O objetivo deste trabalho foi implementar o tão conhecido jogo "Conect-Four" em Python e analisar as diferenças na performance de vários algoritmos de pesquisa, algoritmos adversariais e não-adversariais. Para além do A star e do Monte Carlo, implementamos também o Mini-Max.
 
 Os primeiros passos foram implementar as classes Board e Game, tendo em conta as regras do jogo. Para ser criado um tabuleiro, basta indicar o tamanho do mesmo (linhas e colunas). A classe tem métodos para verificar se dois tabuleiros são iguais, verificar se existe uma peça numa dada posição e qual é, colocar uma peça numa certa posição e verificar se um movimento é terminal, ou seja, se o jogo acabou. A classe Game recebe duas funções que determinam quais serão os algoritmos a participar no jogo e executa um certo número de jogos, retornando as estatísticas sobre os mesmos (tempo, percentagem de vitórias, etc)
