@@ -48,8 +48,16 @@ O backpropagate atualiza as vitorias e numero de visitas dos nos pais
 
 
 Mini-Max:
-O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final. a função minimax() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. Se o estado atual for terminal ou a profundidade máxima tiver sido atingida, é dada uma certa pontuação sendo a pontuação dada quando a jogada é terminal mais pesada obrigando o algorto a ter em maior consideração as derrotas e as vitórias vistas. Ao explorar todos os moves possíveis, vai alternando entre maximizing e minimizing consoante a quem pertenceria a jogada. Durante a pesquisa, atualiza os valores alpha e beta para eliminar ramos que não afetarão o resultado final.
-O execute_minimax_move_with_transposition() guarda, por ordem, os custos. Quando executa uma nova jogada cujos estados já tivessem sido previamente calculados não terá de recalculá-los, para além do mais, como os custos estão ordenados, dependendo de quem fez a jogada só se tem de ver ou o primeiro ou o ultimo nó guardados
+O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final. a função minimax() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. 
+
+Quando atinjimos a profundidade maxima usamos a heuristica para avaliar o estado do tabuleiro.
+Se a pesquisa terminar porque atinjimos um estado final damos uma pontuação de infinito se for vitorias -infinito se for derrota e 0 em caso de empate.
+Isto é para tornar a AI mais agressiva no final do jogo ja q se apenas usarmos a heuristica ela pode optar por fazer jogadas q aumentam a pontuação mas q nao ganham o jogo.
+
+Ao explorar todos os moves possíveis, vai alternando entre maximizing e minimizing consoante a quem pertenceria a jogada. Durante a pesquisa, atualiza os valores alpha e beta para eliminar ramos que não afetarão o resultado final.
+
+O execute_minimax_move_with_transposition() faz iterative deppening, ou seja, faz a pesquisa completa para profundidade 1, depois para 2, ate ou acabar o tempo ou atingir a profundidade maxima.
+De cada vez que aumenta a profundidade mantem informação sobre a pesquisa anterior. Isso permite q caso um estado ja tenha sido visitado anteriormente usamos o valor da heuristica para ordenar a visita dos nós por uma ordem (crescente ou decrescente) tal que tenha mais chance de se aplicarem os cortes alpha e beta. 
 
 
 Análise dos resultados:
