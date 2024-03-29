@@ -58,6 +58,7 @@ Ao explorar todos os moves possíveis, vai alternando entre maximizing e minimiz
 
 O execute_minimax_move_with_transposition() faz iterative deppening, ou seja, faz a pesquisa completa para profundidade 1, depois para 2, ate ou acabar o tempo ou atingir a profundidade maxima.
 De cada vez que aumenta a profundidade mantem informação sobre a pesquisa anterior. Isso permite q caso um estado ja tenha sido visitado anteriormente usamos o valor da heuristica para ordenar a visita dos nós por uma ordem (crescente ou decrescente) tal que tenha mais chance de se aplicarem os cortes alpha e beta. 
+Isso faz q para a msm perfundidade o execute_minimax_move_with_transposition acabe por expandir menos nós.
 
 
 Análise dos resultados:
