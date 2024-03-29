@@ -18,12 +18,20 @@ O objetivo deste trabalho foi implementar o tão conhecido jogo "Connect-Four" e
 
 Os primeiros passos foram implementar as classes Board e Game, tendo em conta as regras do jogo. Para ser criado um tabuleiro, basta indicar o tamanho do mesmo (linhas e colunas). A classe tem métodos para verificar se dois tabuleiros são iguais, verificar se existe uma peça numa dada posição e qual é, colocar uma peça numa certa posição e verificar se um movimento é terminal, ou seja, se o jogo acabou. A classe Game recebe duas funções que determinam quais serão os algoritmos a participar no jogo e executa um certo número de jogos, retornando as estatísticas sobre os mesmos (tempo, percentagem de vitórias, etc)
 
+############A-star#############################################
 Para implementar o A star, é primeiro necessário criar a classe Node. Cada nó guarda o estado do tabuleiro anterior e o movimento a ser executado. Um nó é melhor que outro quando tem um custo f menor e sabemos que f é g mais h, sendo g a "distância" e h a "heurística".
 A função execute_a_star_move recebe a função da heurística e retorna outra função: execute_a_star_move_aux. Esta recebe o tabuleiro inicial e retorna a melhor jogada calculada pelo algoritmo.
 E qual é o processo?
 A função inicializa uma fila de prioridade ('to_visit') para guardar os nós a serem visitados, sendo que quanto menor o custo "f", maior a prioridade. Depois, expande todos os nós iterativamente, ou seja, investiga todos os próximos movimentos possíveis e escolhe o "melhor", tendo em conta a distância (g) e a pontuação da heurística (h). O algoritmo não tem em conta a exitência de um adversário e a árvore é expandida até chegar a um move terminal (até ganhar). Durante a expansão, é calculado o custo 'f'para cada movimento possível e o mesmo é adiconado à fila de prioridade. Quando é atingido um estado terminal ou todos os movimentos foram analisados, a melhor jogada é determinada tendo em conta o antecedente ao nó que atingiu o objetivo.
+
+Funções de utilidade:
+- index_of: se ao analisarmos um movimento, chegarmos a um tabuleiro já analisado, não é criada uma nova posição na fila de prioridade, apenas é atualizado o custo "f".
+- heap_repair: repara a prioridade da fila quando um elemento é removido ou a prioridade é alterada.
+
 A primeira heurística que criamos tem em conta o estado do tabuleiro anterior e apenas altera a pontuação acrescentando os pontos das posições em torno da nova peça jogada, ou seja, verificamos apenas os grupos de quatro a que aquela posição pertence e alteramos a pontuação tendo isso em conta.
 A segunda heurística calcula a pontuação do zero, dado um tabuleiro, tendo em conta as regras descritas no pdf do trabalho.
+
+#################################################################
 
 # Monte carlo
 Para implementar o Monte Carlo, é também necessário criar uma classe Node diferente. Neste caso, cada nó guarda, para além do tabuleiro anterior e o movimento a ser executado, guarda as vitórias, as visitas, o nó pai e os filhos.
