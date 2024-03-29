@@ -48,15 +48,20 @@ O backpropagate atualiza as vitorias e numero de visitas dos nos pais
 
 
 Mini-Max:
-O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final. a função minimax() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. 
+
+O algoritmo do Mini-Max explora as várias possiveis jogadas de um determinado tabuleiro avalia e compara-as.
+O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final.
+
+
+A função minimax() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. 
 
 Quando atinjimos a profundidade maxima usamos a heuristica para avaliar o estado do tabuleiro.
 Se a pesquisa terminar porque atinjimos um estado final damos uma pontuação de infinito se for vitorias -infinito se for derrota e 0 em caso de empate.
-Isto é para tornar a AI mais agressiva no final do jogo ja q se apenas usarmos a heuristica ela pode optar por fazer jogadas q aumentam a pontuação mas q nao ganham o jogo.
+Isto é para tornar a AI mais agressiva no final do jogo ja q, se apenas usarmos a heuristica, ela pode optar por fazer jogadas q aumentam a pontuação mas q nao ganham o jogo.
 
 Ao explorar todos os moves possíveis, vai alternando entre maximizing e minimizing consoante a quem pertenceria a jogada. Durante a pesquisa, atualiza os valores alpha e beta para eliminar ramos que não afetarão o resultado final.
 
-O execute_minimax_move_with_transposition() faz iterative deppening, ou seja, faz a pesquisa completa para profundidade 1, depois para 2, ate ou acabar o tempo ou atingir a profundidade maxima.
+O execute_minimax_move_with_transposition() faz iterative deepening, ou seja, faz a pesquisa completa para profundidade 1, depois para 2, ate o tempo acabar ou a profundidade maxima ser atingida.
 De cada vez que aumenta a profundidade mantem informação sobre a pesquisa anterior. Isso permite q caso um estado ja tenha sido visitado anteriormente usamos o valor da heuristica para ordenar a visita dos nós por uma ordem (crescente ou decrescente) tal que tenha mais chance de se aplicarem os cortes alpha e beta. 
 Isso faz q para a msm perfundidade o execute_minimax_move_with_transposition acabe por expandir menos nós.
 
