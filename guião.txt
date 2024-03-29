@@ -14,25 +14,34 @@
 
 
 
-O objetivo deste trabalho foi implementar o tão conhecido jogo "Conect-Four" em Python e analisar as diferenças na performance de vários algoritmos de pesquisa, algoritmos adversariais e não-adversariais. Para além do A star e do Monte Carlo, implementamos também o Mini-Max.
+O objetivo deste trabalho foi implementar o tão conhecido jogo "Connect-Four" em Python e analisar as diferenças na performance de vários algoritmos de pesquisa, algoritmos adversariais e não-adversariais. Para além do A star e do Monte Carlo, implementamos também o Mini-Max.
 
 Os primeiros passos foram implementar as classes Board e Game, tendo em conta as regras do jogo. Para ser criado um tabuleiro, basta indicar o tamanho do mesmo (linhas e colunas). A classe tem métodos para verificar se dois tabuleiros são iguais, verificar se existe uma peça numa dada posição e qual é, colocar uma peça numa certa posição e verificar se um movimento é terminal, ou seja, se o jogo acabou. A classe Game recebe duas funções que determinam quais serão os algoritmos a participar no jogo e executa um certo número de jogos, retornando as estatísticas sobre os mesmos (tempo, percentagem de vitórias, etc)
 
 Para implementar o A star, é primeiro necessário criar a classe Node. Cada nó guarda o estado do tabuleiro anterior e o movimento a ser executado. Um nó é melhor que outro quando tem um custo f menor e sabemos que f é g mais h, sendo g a "distância" e h a "heurística".
-A função execute_a_star_move recebe a função da heurística e retorna outra função: execute_a_star_move_aux. Esta recebe o tabuleiro inicial e retorna a melhor jogada calculada pelo algoritmo. 
+A função execute_a_star_move recebe a função da heurística e retorna outra função: execute_a_star_move_aux. Esta recebe o tabuleiro inicial e retorna a melhor jogada calculada pelo algoritmo.
 E qual é o processo?
 A função inicializa uma fila de prioridade ('to_visit') para guardar os nós a serem visitados, sendo que quanto menor o custo "f", maior a prioridade. Depois, expande todos os nós iterativamente, ou seja, investiga todos os próximos movimentos possíveis e escolhe o "melhor", tendo em conta a distância (g) e a pontuação da heurística (h). O algoritmo não tem em conta a exitência de um adversário e a árvore é expandida até chegar a um move terminal (até ganhar). Durante a expansão, é calculado o custo 'f'para cada movimento possível e o mesmo é adiconado à fila de prioridade. Quando é atingido um estado terminal ou todos os movimentos foram analisados, a melhor jogada é determinada tendo em conta o antecedente ao nó que atingiu o objetivo.
 A primeira heurística que criamos tem em conta o estado do tabuleiro anterior e apenas altera a pontuação acrescentando os pontos das posições em torno da nova peça jogada, ou seja, verificamos apenas os grupos de quatro a que aquela posição pertence e alteramos a pontuação tendo isso em conta.
 A segunda heurística calcula a pontuação do zero, dado um tabuleiro, tendo em conta as regras descritas no pdf do trabalho.
 
-Para implementar o Monte Carlo, é também necessário criar uma classe Node. Neste caso, cada nó guarda, para além do tabuleiro anterior e o movimento a ser executado, as vitórias e as visitas.
----
----
----
----
+# Monte carlo
+Para implementar o Monte Carlo, é também necessário criar uma classe Node diferente. Neste caso, cada nó guarda, para além do tabuleiro anterior e o movimento a ser executado, guarda as vitórias, as visitas, o nó pai e os filhos.
+
+Na seleção escolhemos o nó com o melhor UCB. A constante C foi escolhida manualmente jogando contra nos humanos.
+Se o nó escolhido for terminal entao saltamos para o backpropagate.
+
+Na expanção os filhos sao escolhidos por ordem decrescente da pontuação da heuristica.
+Quando todos os filhos ja foram expandidos é escolhido um aleatoriamente.
+Temos o cuidado de nao criar nós duplicados para a msm jogada.
+
+O simulate simplesmente joga aleatoriamente ate chegar a um estado final.
+O backpropagate atualiza as vitorias e numero de visitas dos nos pais
+
 
 Mini-Max:
-O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final. a função mini_max() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. Se o estado atual for terminal ou a profundidade máxima tiver sido atingida, é dada uma certa pontuação. Senão, explora todos os moves possíveis, alternando entre maximizing e minimizing. Durante a pesquisa, atualiza os valores alpha e beta para eliminar ramos que não afetarão o resultado final.
+O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final. a função minimax() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. Se o estado atual for terminal ou a profundidade máxima tiver sido atingida, é dada uma certa pontuação sendo a pontuação dada quando a jogada é terminal mais pesada obrigando o algorto a ter em maior consideração as derrotas e as vitórias vistas. Ao explorar todos os moves possíveis, vai alternando entre maximizing e minimizing consoante a quem pertenceria a jogada. Durante a pesquisa, atualiza os valores alpha e beta para eliminar ramos que não afetarão o resultado final.
+O execute_minimax_move_with_transposition() guarda, por ordem, os custos. Quando executa uma nova jogada cujos estados já tivessem sido previamente calculados não terá de recalculá-los, para além do mais, como os custos estão ordenados, dependendo de quem fez a jogada só se tem de ver ou o primeiro ou o ultimo nó guardados
 
 
 Análise dos resultados:
@@ -41,4 +50,3 @@ Análise dos resultados:
 ---
 ---
 ---
-
