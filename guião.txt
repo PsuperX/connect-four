@@ -30,7 +30,8 @@ Para implementar o Monte Carlo, é também necessário criar uma classe Node. Ne
 ---
 
 Mini-Max:
-O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final. a função mini_max() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. Se o estado atual for terminal ou a profundidade máxima tiver sido atingida, é dada uma certa pontuação. Senão, explora todos os moves possíveis, alternando entre maximizing e minimizing. Durante a pesquisa, atualiza os valores alpha e beta para eliminar ramos que não afetarão o resultado final.
+O algoritmo do Mini-Max visita todos os movimentos possíveis no tabuleiro e, para cada move, avalia o estado final. a função minimax() avalia recursivamente um estado do jogo, ao explorar a árvore até uma certa profundidade. Se o estado atual for terminal ou a profundidade máxima tiver sido atingida, é dada uma certa pontuação sendo a pontuação dada quando a jogada é terminal mais pesada obrigando o algorto a ter em maior consideração as derrotas e as vitórias vistas. Ao explorar todos os moves possíveis, vai alternando entre maximizing e minimizing consoante a quem pertenceria a jogada. Durante a pesquisa, atualiza os valores alpha e beta para eliminar ramos que não afetarão o resultado final.
+O execute_minimax_move_with_transposition() guarda, por ordem, os custos. Quando executa uma nova jogada cujos estados já tivessem sido previamente calculados não terá de recalculá-los, para além do mais, como os custos estão ordenados, dependendo de quem fez a jogada só se tem de ver ou o primeiro ou o ultimo nó guardados
 
 
 Análise dos resultados:
