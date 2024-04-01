@@ -25,8 +25,8 @@ E qual é o processo?
 A função inicializa uma fila de prioridade ('to_visit') para guardar os nós a serem visitados, sendo que quanto menor o custo "f", maior a prioridade. Depois, expande todos os nós iterativamente, ou seja, investiga todos os próximos movimentos possíveis e escolhe o "melhor", tendo em conta a distância (g) e a pontuação da heurística (h). O algoritmo não tem em conta a exitência de um adversário e a árvore é expandida até chegar a um move terminal (até ganhar). Durante a expansão, é calculado o custo 'f'para cada movimento possível e o mesmo é adiconado à fila de prioridade. Quando é atingido um estado terminal ou todos os movimentos foram analisados, a melhor jogada é determinada tendo em conta o antecedente ao nó que atingiu o objetivo.
 
 Funções de utilidade:
-- index_of: se ao analisarmos um movimento, chegarmos a um tabuleiro já analisado, não é criada uma nova posição na fila de prioridade, apenas é atualizado o custos "f" e "g" .
-- heap_repair: repara a prioridade da fila quando a prioridade é alterada.
+- index_of: se ao analisarmos um movimento, chegarmos a um tabuleiro já analisado, não é criada uma nova posição na fila de prioridade, apenas é atualizado o custo "f" e "g" .
+- heap_repair: repara a prioridade da fila quando a mesma é alterada.
 
 A primeira heurística que criamos tem em conta o estado do tabuleiro anterior e apenas altera a pontuação acrescentando os pontos das posições em torno da nova peça jogada, ou seja, verificamos apenas os grupos de quatro a que aquela posição pertence e alteramos a pontuação tendo isso em conta.
 A segunda heurística calcula a pontuação do zero, dado um tabuleiro, tendo em conta as regras descritas no pdf do trabalho.
