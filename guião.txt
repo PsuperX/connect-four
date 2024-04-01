@@ -35,7 +35,7 @@ A segunda heurística calcula a pontuação do zero, dado um tabuleiro, tendo em
 # Monte carlo
 Para implementar o Monte Carlo, é também necessário criar uma classe Node diferente. Neste caso, cada nó guarda, para além do tabuleiro anterior e o movimento a ser executado, guarda as vitórias, as visitas, o nó pai e os filhos.
 
-Na seleção escolhemos o nó com o melhor UCB. A constante C foi escolhida manualmente jogando contra nos humanos.
+Na seleção escolhemos o nó global com o melhor UCB. A constante C foi escolhida manualmente jogando contra nos humanos.
 Se o nó escolhido for terminal entao saltamos para o backpropagate.
 
 Na expanção os filhos sao escolhidos por ordem decrescente da pontuação da heuristica.
