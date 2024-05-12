@@ -66,8 +66,12 @@ Isso faz q para a msm perfundidade o execute_minimax_move_with_transposition aca
 
 
 Análise dos resultados:
----
----
----
----
----
+Analizamos o numero de vitorias do random contra todos.
+Surpreendendo ninguem todos ganharam apesar do minimax ter conseguido perder uma vez.
+Nao houve empates mas eles podem msm acontecer.
+
+
+fizemos a msm experiencia mas desta vez contra mcts com a heuristica 2 e o resultado n era oq esperavamos.
+
+Por fim fizemos algumas comparações de algumas estatisticas dos algoritmos para heuristicas diferentes
+Mas só me deram 20 para falar sobre isto por isso deixamos uma analise mais detalhada por baixo de cada grafico
